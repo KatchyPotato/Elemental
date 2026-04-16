@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7b5k8lvn8vks"]
+[gd_scene load_steps=7 format=3 uid="uid://b7b5k8lvn8vks"]
+
+[ext_resource type="PackedScene" uid="uid://b24kmbc10nyer" path="res://block.tscn" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://dbctj133r221s" path="res://character.tscn" id="2_vonw3"]
+[ext_resource type="Texture2D" uid="uid://by5fxpv6nnko5" path="res://icon.svg" id="3_oi3di"]
+[ext_resource type="Script" uid="uid://b48ld1gagnjwd" path="res://icon.gd" id="4_0b4ue"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5xgho"]
-size = Vector3(10, 0.5, 10)
+size = Vector3(15, 0.5, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
-size = Vector3(10, 0.5, 10)
+size = Vector3(15, 0.5, 15)
 
-[node name="Main" type="Node3D"]
+[node name="level" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.888161, 0.459533, 0, -0.459533, 0.888161, 0, 2.87642, 5.80315)
@@ -23,3 +28,15 @@ shape = SubResource("BoxShape3D_u52ul")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.654041, 0.756459, 0, -0.756459, 0.654041, 0, 3.89254, 0.770209)
+shadow_enabled = true
+
+[node name="Block" parent="." instance=ExtResource("1_u52ul")]
+transform = Transform3D(0.81816, 0, -0.574991, 0.203846, 0.935049, 0.290054, 0.537645, -0.35452, 0.765019, 0, 5.35702, 0)
+
+[node name="Character" parent="." instance=ExtResource("2_vonw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -3)
+
+[node name="Icon" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.776, 1.43189, 1.62705)
+texture = ExtResource("3_oi3di")
+script = ExtResource("4_0b4ue")
