@@ -11,27 +11,26 @@ ground_horizon_color = Color(0.195349, 0.0962481, 0.203535, 1)
 [sub_resource type="Sky" id="Sky_vonw3"]
 sky_material = SubResource("ProceduralSkyMaterial_u52ul")
 
-[sub_resource type="Environment" id="Environment_u52ul"]
+[sub_resource type="Environment" id="Environment_oi3di"]
 background_mode = 2
 sky = SubResource("Sky_vonw3")
 tonemap_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_5xgho"]
-size = Vector3(50, 0.5, 50)
+size = Vector3(30, 0.5, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
-size = Vector3(50, 0.5, 50)
+size = Vector3(30, 0.5, 30)
 
 [node name="level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_u52ul")
+environment = SubResource("Environment_oi3di")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-light_color = Color(1, 0.588235, 1, 1)
+light_color = Color(1, 0.67451, 1, 1)
 shadow_enabled = true
-shadow_opacity = 0.5
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26106, 0)
