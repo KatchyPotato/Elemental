@@ -14,7 +14,7 @@ var t_bob = 0.8
 
 # fov variables
 const BASE_FOV = 75.0
-const FOV_CHANGE = 5.0
+const FOV_CHANGE = 3.0
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D

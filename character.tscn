@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://character.gd" id="1_glpr6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vu45j"]
+height = 2.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glpr6"]
+height = 2.5
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_glpr6")
@@ -18,6 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0378652, 0)
 shape = SubResource("CapsuleShape3D_glpr6")
 
 [node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.385811, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644332, 0)
