@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://wwgmm46fitfi"]
+[gd_scene load_steps=5 format=3 uid="uid://wwgmm46fitfi"]
 
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://character.gd" id="1_glpr6"]
+[ext_resource type="Texture2D" uid="uid://d0chqjbw2plrs" path="res://sprites/hands.png" id="2_pjt0s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vu45j"]
 height = 2.5
@@ -24,3 +25,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.385811, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644332, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Head/Camera3D"]
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -434.0
+offset_top = -291.0
+offset_right = 445.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_pjt0s")

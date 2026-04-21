@@ -1,21 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7b5k8lvn8vks"]
+[gd_scene load_steps=11 format=3 uid="uid://b7b5k8lvn8vks"]
 
+[ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_oi3di"]
 [ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://character.tscn" id="2_vonw3"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u52ul"]
-sky_top_color = Color(0, 0, 0, 1)
-sky_horizon_color = Color(0.195349, 0.0962481, 0.203535, 1)
-ground_bottom_color = Color(0.396596, 0.000191657, 0.42934, 1)
-ground_horizon_color = Color(0.195349, 0.0962481, 0.203535, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0b4ue"]
+panorama = ExtResource("1_oi3di")
 
 [sub_resource type="Sky" id="Sky_vonw3"]
-sky_material = SubResource("ProceduralSkyMaterial_u52ul")
+sky_material = SubResource("PanoramaSkyMaterial_0b4ue")
 
 [sub_resource type="Environment" id="Environment_u52ul"]
 background_mode = 2
 sky = SubResource("Sky_vonw3")
 tonemap_mode = 2
+volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
 albedo_texture = ExtResource("1_vonw3")
@@ -37,8 +36,8 @@ size = Vector3(50, 50, 1)
 environment = SubResource("Environment_u52ul")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-light_color = Color(1, 0.588235, 1, 1)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.843725, 0)
+light_color = Color(0.739223, 0.00050595, 0.757434, 1)
 shadow_enabled = true
 shadow_opacity = 0.5
 
@@ -53,7 +52,7 @@ mesh = SubResource("PlaneMesh_u52ul")
 shape = SubResource("BoxShape3D_vonw3")
 
 [node name="Character" parent="." instance=ExtResource("2_vonw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Walls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.3307, 0)
