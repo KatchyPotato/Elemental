@@ -16,8 +16,15 @@ var t_bob = 0.8
 const BASE_FOV = 75.0
 const FOV_CHANGE = 3.0
 
+# on ready camera variables 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+
+# on ready hand variables
+var hands_normal = preload("res://sprites/hands.png")
+var hands_attacking = preload("res://sprites/attacking.png")
+var hands_defending = preload("res://sprites/defending.png")
+@onready var hands = $Head/Camera3D/CanvasLayer/hands
 
 # handle first person camera
 func _ready():
@@ -64,6 +71,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
+		
+	# handle hand animations
+	if Input.is_action_pressed("attack"):
+		hands.texture = hands_attacking
+	elif Input.is_action_pressed("defend"):
+		hands.texture = hands_defending
+	else:
+		hands.texture = hands_normal
 	
 	# head bobbing
 	t_bob += delta * velocity.length() * float(is_on_floor())
