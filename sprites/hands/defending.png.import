@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvfrl57tlv0k2"
-path="res://.godot/imported/defending.png-c84dd2d2074247f5b09fb0062f7b5f4c.ctex"
+path="res://.godot/imported/defending.png-c7ecbdc349e3d0ee7843cb7f6a9011d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/defending.png"
-dest_files=["res://.godot/imported/defending.png-c84dd2d2074247f5b09fb0062f7b5f4c.ctex"]
+source_file="res://sprites/hands/defending.png"
+dest_files=["res://.godot/imported/defending.png-c7ecbdc349e3d0ee7843cb7f6a9011d0.ctex"]
 
 [params]
 

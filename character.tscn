@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wwgmm46fitfi"]
 
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://character.gd" id="1_glpr6"]
-[ext_resource type="Texture2D" uid="uid://dgjkn1he6efmh" path="res://sprites/hands.png" id="2_pjt0s"]
+[ext_resource type="Texture2D" uid="uid://dgjkn1he6efmh" path="res://sprites/hands/hands.png" id="2_pjt0s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vu45j"]
 height = 2.5

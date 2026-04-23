@@ -21,9 +21,9 @@ const FOV_CHANGE = 3.0
 @onready var camera = $Head/Camera3D
 
 # on ready hand variables
-var hands_normal = preload("res://sprites/hands.png")
-var hands_attacking = preload("res://sprites/attacking.png")
-var hands_defending = preload("res://sprites/defending.png")
+var hands_normal = preload("res://sprites/hands/hands.png")
+var hands_attacking = preload("res://sprites/hands/attacking.png")
+var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var hands = $Head/Camera3D/CanvasLayer/hands
 
 # handle first person camera
