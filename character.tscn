@@ -9,7 +9,7 @@ height = 2.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glpr6"]
 height = 2.5
 
-[node name="Character" type="CharacterBody3D"]
+[node name="Character" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_glpr6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

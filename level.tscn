@@ -1,8 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7b5k8lvn8vks"]
+[gd_scene load_steps=13 format=3 uid="uid://b7b5k8lvn8vks"]
 
 [ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_oi3di"]
 [ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://character.tscn" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://iqr4shatha7f" path="res://goblin.tscn" id="4_f2txt"]
+
+[sub_resource type="GDScript" id="GDScript_0b4ue"]
+script/source = "extends Node3D
+
+@onready var target = $Character
+
+func _process(delta: float) -> void:
+	get_tree().call_group(\"enemy\", \"target_position\", target.global_transform.origin)
+"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0b4ue"]
 panorama = ExtResource("1_oi3di")
@@ -16,6 +26,9 @@ sky = SubResource("Sky_vonw3")
 tonemap_mode = 2
 volumetric_fog_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
+size = Vector3(50, 50, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
 albedo_texture = ExtResource("1_vonw3")
 uv1_scale = Vector3(40, 40, 1)
@@ -27,10 +40,8 @@ size = Vector2(50, 50)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 size = Vector3(50, 0, 50)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
-size = Vector3(50, 50, 1)
-
 [node name="level" type="Node3D"]
+script = SubResource("GDScript_0b4ue")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u52ul")
@@ -40,16 +51,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.
 light_color = Color(0.739223, 0.00050595, 0.757434, 1)
 shadow_enabled = true
 shadow_opacity = 0.5
-
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26106, 0)
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("PlaneMesh_u52ul")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_vonw3")
 
 [node name="Character" parent="." instance=ExtResource("2_vonw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -88,3 +89,16 @@ metadata/_edit_group_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00510502, -0.102285, 25.5048)
 shape = SubResource("BoxShape3D_u52ul")
+
+[node name="goblin" parent="." instance=ExtResource("4_f2txt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.533602, 2.77638, -4.88667)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26106, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_u52ul")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_vonw3")
