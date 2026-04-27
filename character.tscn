@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://wwgmm46fitfi"]
+[gd_scene load_steps=8 format=3 uid="uid://wwgmm46fitfi"]
 
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://character.gd" id="1_glpr6"]
 [ext_resource type="Texture2D" uid="uid://dgjkn1he6efmh" path="res://sprites/hands/hands.png" id="2_pjt0s"]
@@ -8,6 +8,18 @@ height = 2.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glpr6"]
 height = 2.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pjt0s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wa5vi"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+albedo_color = Color(1, 0.364706, 0.0392157, 0.482353)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wfnr8"]
+material = SubResource("StandardMaterial3D_wa5vi")
 
 [node name="Character" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_glpr6")
@@ -22,6 +34,7 @@ shape = SubResource("CapsuleShape3D_glpr6")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.385811, 0)
+metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644332, 0)
@@ -42,3 +55,18 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_pjt0s")
 stretch_mode = 3
+
+[node name="BulletSpawn" type="Marker3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000827014, -0.0600024, -1.05274)
+
+[node name="DefenseArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2976, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DefenseArea"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("SphereShape3D_pjt0s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DefenseArea"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("SphereMesh_wfnr8")

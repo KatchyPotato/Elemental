@@ -20,11 +20,18 @@ const FOV_CHANGE = 3.0
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
-# on ready hand variables
+# action variables
 var hands_normal = preload("res://sprites/hands/hands.png")
 var hands_attacking = preload("res://sprites/hands/attacking.png")
 var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var hands = $Head/Camera3D/CanvasLayer/hands
+@onready var defense_area = $DefenseArea
+
+# bullet variables
+var bullet_scene = preload("res://bullet.tscn")
+@onready var bullet_spawn = $Head/Camera3D/BulletSpawn
+var shoot_cooldown = 0.0
+const SHOOT_DELAY = 0.3
 
 # handle first person camera
 func _ready():
@@ -43,6 +50,7 @@ func _unhandled_input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
+	
 	# add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -72,13 +80,26 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 		
-	# handle hand animations
+	# handle hand animations and actions
 	if Input.is_action_pressed("attack"):
 		hands.texture = hands_attacking
+		defense_area.visible = false
+		defense_area.monitoring = false
+		shoot_cooldown -= delta
+		if shoot_cooldown <= 0.0:
+			shoot_cooldown = SHOOT_DELAY
+			var bullet = bullet_scene.instantiate()
+			get_tree().root.add_child(bullet)
+			bullet.global_position = bullet_spawn.global_position
+			bullet.direction = -camera.global_transform.basis.z
 	elif Input.is_action_pressed("defend"):
 		hands.texture = hands_defending
+		defense_area.visible = true
+		defense_area.monitoring = true
 	else:
 		hands.texture = hands_normal
+		defense_area.visible = false
+		defense_area.monitoring = false
 	
 	# head bobbing
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -97,4 +118,3 @@ func _headbob(time) -> Vector3:
 	pose.y = sin(t_bob * BOB_FREQ) * BOB_AMP
 	pose.x = cos(t_bob * BOB_FREQ / 2) * BOB_AMP
 	return pose
-	

@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-# movement variables 
-const SPEED = 4.0
+const SPEED = 7.0
 const GRAVITY = -9.8
 
 # death animation variables 
@@ -9,8 +8,8 @@ var fading = false
 var fade_speed = 5.0
 
 func _ready():
-	$AnimatedSprite3D.play("goblin-walking")
-
+	$AnimatedSprite3D.play("critter-walking")
+	
 func _process(delta):
 	if fading:
 		$AnimatedSprite3D.modulate.a -= fade_speed * delta
@@ -37,7 +36,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func die():
-	$AnimatedSprite3D.rotation_degrees.z = 90.0
 	fading = true
 	
 	

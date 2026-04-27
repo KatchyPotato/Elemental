@@ -28,7 +28,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_macxp"]
 
-[node name="goblin" type="CharacterBody3D"]
+[node name="goblin" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_eyhpr")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
