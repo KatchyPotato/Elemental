@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dijdw7kyqdf1g"]
+[gd_scene load_steps=7 format=3 uid="uid://dijdw7kyqdf1g"]
 
 [ext_resource type="Texture2D" uid="uid://draciynk5g3cm" path="res://sprites/critter/critter1.png" id="1_ew25p"]
 [ext_resource type="Script" uid="uid://va70c31tlb48" path="res://critter.gd" id="1_l11x4"]
 [ext_resource type="Texture2D" uid="uid://jbjbcepgrj8s" path="res://sprites/critter/critter2.png" id="2_l11x4"]
+[ext_resource type="AudioStream" uid="uid://cnre741shkw8e" path="res://sounds/death.mp3" id="4_c2etd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xts2v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c2etd"]
 animations = [{
@@ -18,17 +21,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xts2v"]
-
 [node name="critter" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_l11x4")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.125, 0, 0, 0, 1, 0, 0, 0, 2.125, 0, 0.803454, 0)
+shape = SubResource("CapsuleShape3D_xts2v")
+
+[node name="PivotPoint" type="Node3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="PivotPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.910586, 0)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_c2etd")
 animation = &"critter-walking"
 frame_progress = 0.122526
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.8, 0, 0, 0, 2.5, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_xts2v")
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_c2etd")

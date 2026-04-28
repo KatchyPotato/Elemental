@@ -27,11 +27,17 @@ var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var hands = $Head/Camera3D/CanvasLayer/hands
 @onready var defense_area = $DefenseArea
 
+# sound effects
+@onready var shoot_sound = $ShootSound
+@onready var hum_sound = $HumSound
+@onready var step_sound = $StepSound
+
+
 # bullet variables
 var bullet_scene = preload("res://bullet.tscn")
 @onready var bullet_spawn = $Head/Camera3D/BulletSpawn
 var shoot_cooldown = 0.0
-const SHOOT_DELAY = 0.3
+const SHOOT_DELAY = 0.5
 
 # handle first person camera
 func _ready():
@@ -68,6 +74,7 @@ func _physics_process(delta: float) -> void:
 	# get the input direction and handle the movement/deceleration
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction: Vector3 = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * speed
@@ -86,20 +93,29 @@ func _physics_process(delta: float) -> void:
 		defense_area.visible = false
 		defense_area.monitoring = false
 		shoot_cooldown -= delta
+		
 		if shoot_cooldown <= 0.0:
 			shoot_cooldown = SHOOT_DELAY
+			shoot_sound.play()
 			var bullet = bullet_scene.instantiate()
 			get_tree().root.add_child(bullet)
 			bullet.global_position = bullet_spawn.global_position
 			bullet.direction = -camera.global_transform.basis.z
+		
+		hum_sound.stop()
+	
 	elif Input.is_action_pressed("defend"):
 		hands.texture = hands_defending
 		defense_area.visible = true
 		defense_area.monitoring = true
+		if not hum_sound.playing:
+			hum_sound.play()
+	
 	else:
 		hands.texture = hands_normal
 		defense_area.visible = false
 		defense_area.monitoring = false
+		hum_sound.stop()
 	
 	# head bobbing
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -110,7 +126,6 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 0.8)
 	
-
 	move_and_slide()
 	
 func _headbob(time) -> Vector3:

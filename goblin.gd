@@ -1,20 +1,26 @@
 extends CharacterBody3D
 
 # movement variables 
-const SPEED = 4.0
+const SPEED = 3.0
 const GRAVITY = -9.8
 
 # death animation variables 
 var fading = false
 var fade_speed = 5.0
+var target_rotation = 0.0
+
+@onready var sprite = $PivotPoint/AnimatedSprite3D
+@onready var death_sound = $DeathSound
 
 func _ready():
-	$AnimatedSprite3D.play("goblin-walking")
+	sprite.play("goblin-walking")
 
 func _process(delta):
 	if fading:
-		$AnimatedSprite3D.modulate.a -= fade_speed * delta
-		if $AnimatedSprite3D.modulate.a <= 0:
+		target_rotation = lerp(target_rotation, -90.0, delta * 5.0)
+		$PivotPoint.rotation_degrees.x = target_rotation
+		sprite.modulate.a -= fade_speed * delta
+		if sprite.modulate.a <= 0.0 and not $DeathSound.playing:
 			queue_free()
 
 func _physics_process(delta):
@@ -37,7 +43,15 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func die():
-	$AnimatedSprite3D.rotation_degrees.z = 90.0
+	death_sound.play()
+	$CollisionShape3D.disabled = true
 	fading = true
+	sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		var direction = (player.global_position - global_position).normalized()
+		direction.y = 0
+		look_at(global_position + -direction, Vector3.UP)
+	
 	
 	
