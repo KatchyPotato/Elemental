@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs87pvxoecp4b"]
+
+[ext_resource type="Script" uid="uid://70o5n68fnkpg" path="res://scripts/goblin_bullet.gd" id="1_k0n2a"]
+[ext_resource type="Texture2D" uid="uid://co35jnnoj5bve" path="res://sprites/goblinorb/goblinorb1.png" id="2_enkcy"]
+[ext_resource type="Texture2D" uid="uid://dmjl4vc6tqocm" path="res://sprites/goblinorb/goblinorb2.png" id="3_m2lfk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ndi7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60xld"]
+animations = [{
+"frames": [{
+"duration": 0.1,
+"texture": ExtResource("2_enkcy")
+}, {
+"duration": 0.1,
+"texture": ExtResource("3_m2lfk")
+}],
+"loop": true,
+"name": &"crackling",
+"speed": 5.0
+}]
+
+[node name="GoblinBullet" type="Area3D"]
+script = ExtResource("1_k0n2a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("SphereShape3D_8ndi7")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_60xld")
+animation = &"crackling"
+frame_progress = 0.0583049

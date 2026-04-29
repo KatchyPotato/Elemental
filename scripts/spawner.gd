@@ -1,11 +1,11 @@
 extends Marker3D
 
 var spawn_cooldown = 0.0
-var goblin_scene = preload("res://goblin.tscn")
-var critter_scene = preload("res://critter.tscn")
+var goblin_scene = preload("res://scenes/goblin.tscn")
+var critter_scene = preload("res://scenes/critter.tscn")
 
 func _ready():
-	spawn_cooldown = randf_range(1.0, 20.0)
+	spawn_cooldown = randf_range(10.0, 30.0)
 	
 func _physics_process(delta: float) -> void:
 	spawn_cooldown -= delta

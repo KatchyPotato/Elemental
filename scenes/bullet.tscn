@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://co4uogws1pyiv"]
 
-[ext_resource type="Script" uid="uid://cf3awq6ev4515" path="res://bullet.gd" id="1_v7oki"]
-[ext_resource type="Texture2D" uid="uid://b6m58epyniedh" path="res://sprites/orb/orb1.png" id="2_t4vbm"]
-[ext_resource type="Texture2D" uid="uid://bgov3otc1aueu" path="res://sprites/orb/orb2.png" id="3_2b2rl"]
+[ext_resource type="Script" uid="uid://cf3awq6ev4515" path="res://scripts/bullet.gd" id="1_l5glv"]
+[ext_resource type="Texture2D" uid="uid://b6m58epyniedh" path="res://sprites/orb/orb1.png" id="2_eoqba"]
+[ext_resource type="Texture2D" uid="uid://bgov3otc1aueu" path="res://sprites/orb/orb2.png" id="3_qncy5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v8qja"]
 
@@ -10,10 +10,10 @@
 animations = [{
 "frames": [{
 "duration": 0.1,
-"texture": ExtResource("2_t4vbm")
+"texture": ExtResource("2_eoqba")
 }, {
 "duration": 0.1,
-"texture": ExtResource("3_2b2rl")
+"texture": ExtResource("3_qncy5")
 }],
 "loop": true,
 "name": &"crackling",
@@ -21,15 +21,16 @@ animations = [{
 }]
 
 [node name="Bullet" type="Area3D"]
-script = ExtResource("1_v7oki")
+script = ExtResource("1_l5glv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.00789165, 0, 0.00431061)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("SphereShape3D_v8qja")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.00232643, 1.49012e-08, -0.000717878)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_b7duk")
 animation = &"crackling"
-frame_progress = 0.357198
+frame = 1
+frame_progress = 0.967515

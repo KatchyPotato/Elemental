@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://b7b5k8lvn8vks"]
 
-[ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_oi3di"]
-[ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="1_vonw3"]
-[ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://character.tscn" id="2_vonw3"]
-[ext_resource type="PackedScene" uid="uid://cirf7vr7pubi2" path="res://spawner.tscn" id="5_f2txt"]
-[ext_resource type="AudioStream" uid="uid://joktly6s3lvb" path="res://sounds/music.mp3" id="6_1ainy"]
+[ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_ppgk2"]
+[ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://scenes/character.tscn" id="2_2r41h"]
+[ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="3_klq6b"]
+[ext_resource type="AudioStream" uid="uid://joktly6s3lvb" path="res://sounds/music.mp3" id="4_b121j"]
+[ext_resource type="PackedScene" uid="uid://cirf7vr7pubi2" path="res://scenes/spawner.tscn" id="5_8c41q"]
 
 [sub_resource type="GDScript" id="GDScript_0b4ue"]
 script/source = "extends Node3D
@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 "
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0b4ue"]
-panorama = ExtResource("1_oi3di")
+panorama = ExtResource("1_ppgk2")
 
 [sub_resource type="Sky" id="Sky_vonw3"]
 sky_material = SubResource("PanoramaSkyMaterial_0b4ue")
@@ -31,7 +31,7 @@ volumetric_fog_enabled = true
 size = Vector3(50, 50, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
-albedo_texture = ExtResource("1_vonw3")
+albedo_texture = ExtResource("3_klq6b")
 uv1_scale = Vector3(40, 40, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_u52ul"]
@@ -53,7 +53,7 @@ light_color = Color(0.739223, 0.00050595, 0.757434, 1)
 shadow_enabled = true
 shadow_opacity = 0.5
 
-[node name="Character" parent="." instance=ExtResource("2_vonw3")]
+[node name="Character" parent="." instance=ExtResource("2_2r41h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Walls" type="Node3D" parent="."]
@@ -102,31 +102,31 @@ mesh = SubResource("PlaneMesh_u52ul")
 shape = SubResource("BoxShape3D_vonw3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_1ainy")
+stream = ExtResource("4_b121j")
 autoplay = true
 
 [node name="Spawners" type="Node3D" parent="."]
 
-[node name="EnemySpawner" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0674, 2, -22.2764)
 
-[node name="EnemySpawner6" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner6" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.720142, 2, -22.2764)
 
-[node name="EnemySpawner2" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner2" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6327, 2, -21.8622)
 
-[node name="EnemySpawner7" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner7" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6327, 2, -0.320066)
 
-[node name="EnemySpawner3" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner3" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1528, 2, 21.5319)
 
-[node name="EnemySpawner8" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner8" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460554, 2, 21.5319)
 
-[node name="EnemySpawner4" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner4" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7968, 2, 21.9872)
 
-[node name="EnemySpawner5" parent="Spawners" instance=ExtResource("5_f2txt")]
+[node name="EnemySpawner5" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7936, 2, 0.488987)

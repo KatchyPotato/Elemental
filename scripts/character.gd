@@ -34,7 +34,7 @@ var hands_defending = preload("res://sprites/hands/defending.png")
 
 
 # bullet variables
-var bullet_scene = preload("res://bullet.tscn")
+var bullet_scene = preload("res://scenes/bullet.tscn")
 @onready var bullet_spawn = $Head/Camera3D/BulletSpawn
 var shoot_cooldown = 0.0
 const SHOOT_DELAY = 0.5
