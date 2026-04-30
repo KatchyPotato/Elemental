@@ -20,7 +20,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="GoblinBullet" type="Area3D"]
+[node name="GoblinBullet" type="Area3D" groups=["projectile"]]
 script = ExtResource("1_k0n2a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

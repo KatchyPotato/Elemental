@@ -12,7 +12,5 @@ func _process(delta):
 	global_position += direction * SPEED * delta
 
 func _on_body_entered(body):
-	# pass later code to deal damage to the player
-	# if defense shield is up, ignore damage and reset shield
 	if not body.is_in_group("enemy"):
 		queue_free()

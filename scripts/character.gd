@@ -31,7 +31,7 @@ var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var shoot_sound = $ShootSound
 @onready var hum_sound = $HumSound
 @onready var step_sound = $StepSound
-
+@onready var damage_sound = $DamageSound
 
 # bullet variables
 var bullet_scene = preload("res://scenes/bullet.tscn")
@@ -39,9 +39,33 @@ var bullet_scene = preload("res://scenes/bullet.tscn")
 var shoot_cooldown = 0.0
 const SHOOT_DELAY = 0.5
 
+# health variables
+var health = 0
+@onready var heart = $"../HeathUI/Heart"
+var heart_frames = [
+	preload("res://ui/health/heart1.png"),
+	preload("res://ui/health/heart2.png"),
+	preload("res://ui/health/heart3.png"),
+	preload("res://ui/health/heart4.png"),
+	preload("res://ui/health/heart5.png"),
+	preload("res://ui/health/heart6.png"),
+	preload("res://ui/health/heart7.png"),
+	preload("res://ui/health/heart8.png"),
+	preload("res://ui/health/heart9.png"),
+	preload("res://ui/health/heart10.png")
+]
+
+var invincible = false
+var invincible_timer = 0.0
+const INVINCIBLE_DURATION = 0.5
+
 # handle first person camera
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$DamageArea.body_entered.connect(_on_damage_area_body_entered)
+	$DamageArea.area_entered.connect(_on_damage_area_area_entered)
+	heart.texture = heart_frames[0]
+	
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -126,6 +150,12 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 0.8)
 	
+	# invincibility cooldown
+	if invincible:
+		invincible_timer -= delta
+		if invincible_timer <= 0.0:
+			invincible = false
+	
 	move_and_slide()
 	
 func _headbob(time) -> Vector3:
@@ -133,3 +163,23 @@ func _headbob(time) -> Vector3:
 	pose.y = sin(t_bob * BOB_FREQ) * BOB_AMP
 	pose.x = cos(t_bob * BOB_FREQ / 2) * BOB_AMP
 	return pose
+	
+func _on_damage_area_body_entered(body):
+	if body.is_in_group("enemy"):
+		take_damage()
+		
+func take_damage():
+	if invincible:
+		return
+	invincible = true
+	invincible_timer = INVINCIBLE_DURATION
+	damage_sound.play()
+	health += 1
+	heart.texture = heart_frames[health]
+	if health >= 9:
+		get_tree().reload_current_scene()
+
+func _on_damage_area_area_entered(area):
+	if area.is_in_group("projectile"):
+		area.queue_free()
+		take_damage()

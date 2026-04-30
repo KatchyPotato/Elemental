@@ -4,7 +4,8 @@ extends CharacterBody3D
 const SPEED = 3.0
 const GRAVITY = -9.8
 
-# death animation variables 
+# death animation variables
+var is_dead = false 
 var fading = false
 var fade_speed = 5.0
 var target_rotation = 0.0
@@ -22,7 +23,7 @@ var shoot_cooldown = 0.0
 
 func _ready():
 	sprite.play("goblin-walking")
-	shoot_cooldown = randf_range(5.0, 10.0)
+	shoot_cooldown = randf_range(1.0, 5.0)
 
 func _process(delta):
 	
@@ -64,7 +65,7 @@ func _physics_process(delta):
 		shoot_cooldown -= delta
 		
 		if shoot_cooldown <= 0.0:
-			shoot_cooldown = randf_range(5.0, 10.0)
+			shoot_cooldown = randf_range(1.0, 5.0)
 			shoot_sound.play()
 			var bullet = bullet_scene.instantiate()
 			get_tree().root.add_child(bullet)
@@ -72,8 +73,11 @@ func _physics_process(delta):
 			bullet.direction = (player.global_position - bullet_spawn.global_position).normalized()
 		
 func die():
+	if is_dead:
+		return
+	is_dead = true
 	death_sound.play()
-	$CollisionShape3D.disabled = true
+	$CollisionShape3D.set_deferred("disabled", true)
 	fading = true
 	sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	var player = get_tree().get_first_node_in_group("player")

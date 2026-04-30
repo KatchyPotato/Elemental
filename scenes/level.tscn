@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7b5k8lvn8vks"]
+[gd_scene load_steps=15 format=3 uid="uid://b7b5k8lvn8vks"]
 
 [ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://scenes/character.tscn" id="2_2r41h"]
 [ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="3_klq6b"]
 [ext_resource type="AudioStream" uid="uid://joktly6s3lvb" path="res://sounds/music.mp3" id="4_b121j"]
 [ext_resource type="PackedScene" uid="uid://cirf7vr7pubi2" path="res://scenes/spawner.tscn" id="5_8c41q"]
+[ext_resource type="Texture2D" uid="uid://dbqdb5fltxykc" path="res://ui/health/heart1.png" id="6_wc255"]
 
 [sub_resource type="GDScript" id="GDScript_0b4ue"]
 script/source = "extends Node3D
@@ -130,3 +131,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7968, 2, 21.9872)
 
 [node name="EnemySpawner5" parent="Spawners" instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7936, 2, 0.488987)
+
+[node name="HeathUI" type="CanvasLayer" parent="."]
+
+[node name="Heart" type="TextureRect" parent="HeathUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -200.0
+offset_right = 261.0
+offset_bottom = 140.0
+grow_vertical = 0
+scale = Vector2(0.522727, 0.522727)
+texture = ExtResource("6_wc255")
+stretch_mode = 3

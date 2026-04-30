@@ -43,8 +43,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func die():
+	if is_dead:
+		return
+	is_dead = true
 	death_sound.play()
-	$CollisionShape3D.disabled = true
+	$CollisionShape3D.set_deferred("disabled", true)
 	fading = true
 	sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	var player = get_tree().get_first_node_in_group("player")
