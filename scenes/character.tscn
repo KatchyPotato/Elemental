@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://wwgmm46fitfi"]
+[gd_scene load_steps=14 format=4 uid="uid://wwgmm46fitfi"]
 
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://scripts/character.gd" id="1_glpr6"]
 [ext_resource type="Texture2D" uid="uid://dgjkn1he6efmh" path="res://sprites/hands/hands.png" id="2_pjt0s"]
 [ext_resource type="AudioStream" uid="uid://b7ycrtvfr4p1h" path="res://sounds/shot.mp3" id="3_wa5vi"]
 [ext_resource type="AudioStream" uid="uid://l84jvtf1y38j" path="res://sounds/hum.mp3" id="4_wfnr8"]
 [ext_resource type="AudioStream" uid="uid://df7341hux251c" path="res://sounds/damage.mp3" id="5_dp8ca"]
+[ext_resource type="AudioStream" uid="uid://cdtjck5ukv5pb" path="res://sounds/heal.mp3" id="6_0lw5n"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vu45j"]
 height = 2.5
@@ -66,9 +67,8 @@ stretch_mode = 3
 [node name="BulletSpawn" type="Marker3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000827014, -0.0600024, -1.05274)
 
-[node name="DefenseArea" type="Area3D" parent="."]
+[node name="DefenseArea" type="Area3D" parent="." groups=["defense"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2976, 0)
-visible = false
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DefenseArea"]
@@ -96,3 +96,6 @@ shape = SubResource("CapsuleShape3D_my7n2")
 
 [node name="DamageSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_dp8ca")
+
+[node name="HealSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_0lw5n")

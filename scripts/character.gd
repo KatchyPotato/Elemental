@@ -32,6 +32,7 @@ var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var hum_sound = $HumSound
 @onready var step_sound = $StepSound
 @onready var damage_sound = $DamageSound
+@onready var heal_sound = $HealSound
 
 # bullet variables
 var bullet_scene = preload("res://scenes/bullet.tscn")
@@ -58,6 +59,8 @@ var heart_frames = [
 var invincible = false
 var invincible_timer = 0.0
 const INVINCIBLE_DURATION = 0.5
+var heal_timer = 0.0
+const HEAL_DELAY = 5.0
 
 # handle first person camera
 func _ready():
@@ -155,6 +158,15 @@ func _physics_process(delta: float) -> void:
 		invincible_timer -= delta
 		if invincible_timer <= 0.0:
 			invincible = false
+			
+	# health regen while defending
+	if Input.is_action_pressed("defend") and health > 0 :
+		heal_timer -= delta
+		if heal_timer <= 0.0:
+			heal_timer = HEAL_DELAY
+			health -= 1
+			heal_sound.play()
+			heart.texture = heart_frames[health]
 	
 	move_and_slide()
 	

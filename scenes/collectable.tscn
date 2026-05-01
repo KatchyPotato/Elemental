@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cit03g447ipuj"]
+
+[ext_resource type="Script" uid="uid://c5xd0d0ilp4qu" path="res://scenes/collectable.gd" id="1_llfh3"]
+[ext_resource type="Texture2D" uid="uid://c5erybuqfsdfi" path="res://sprites/crystal/crystal-red.png" id="1_ti8a4"]
+[ext_resource type="AudioStream" uid="uid://dc275hwgm4u4a" path="res://sounds/collect.mp3" id="3_dnya4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dnya4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_llfh3"]
+
+[node name="Collectable" type="CharacterBody3D"]
+script = ExtResource("1_llfh3")
+
+[node name="Crystal" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 2
+texture = ExtResource("1_ti8a4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.464323, 0)
+shape = SubResource("SphereShape3D_dnya4")
+
+[node name="PickupArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+shape = SubResource("CapsuleShape3D_llfh3")
+
+[node name="CollectSound" type="AudioStreamPlayer3D" parent="PickupArea"]
+stream = ExtResource("3_dnya4")
