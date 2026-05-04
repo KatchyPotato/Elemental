@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7b5k8lvn8vks"]
+[gd_scene load_steps=18 format=3 uid="uid://b7b5k8lvn8vks"]
 
-[ext_resource type="Texture2D" uid="uid://dlrhlea8tyfe6" path="res://textures/background.png" id="1_ppgk2"]
+[ext_resource type="Texture2D" uid="uid://ce7hidb81jpli" path="res://textures/background.png" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://wwgmm46fitfi" path="res://scenes/character.tscn" id="2_2r41h"]
 [ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="3_klq6b"]
 [ext_resource type="AudioStream" uid="uid://joktly6s3lvb" path="res://sounds/music.mp3" id="4_b121j"]
 [ext_resource type="PackedScene" uid="uid://cirf7vr7pubi2" path="res://scenes/spawner.tscn" id="5_8c41q"]
+[ext_resource type="Script" uid="uid://cyu4gvu1civt3" path="res://scripts/user_interface.gd" id="6_b121j"]
 [ext_resource type="Texture2D" uid="uid://dbqdb5fltxykc" path="res://ui/health/heart1.png" id="6_wc255"]
+[ext_resource type="Texture2D" uid="uid://dtjbdm5seuqkt" path="res://ui/score/score.png" id="7_klq6b"]
+[ext_resource type="FontFile" uid="uid://dpu1y5vokx81p" path="res://ui/score/Asimovian-Regular.ttf" id="9_8c41q"]
 
 [sub_resource type="GDScript" id="GDScript_0b4ue"]
 script/source = "extends Node3D
@@ -102,39 +105,40 @@ mesh = SubResource("PlaneMesh_u52ul")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_vonw3")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_b121j")
 autoplay = true
 
 [node name="Spawners" type="Node3D" parent="."]
 
-[node name="EnemySpawner" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0674, 2, -22.2764)
 
-[node name="EnemySpawner6" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner6" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.720142, 2, -22.2764)
 
-[node name="EnemySpawner2" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner2" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6327, 2, -21.8622)
 
-[node name="EnemySpawner7" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner7" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6327, 2, -0.320066)
 
-[node name="EnemySpawner3" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner3" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1528, 2, 21.5319)
 
-[node name="EnemySpawner8" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner8" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460554, 2, 21.5319)
 
-[node name="EnemySpawner4" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner4" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7968, 2, 21.9872)
 
-[node name="EnemySpawner5" parent="Spawners" instance=ExtResource("5_8c41q")]
+[node name="EnemySpawner5" parent="Spawners" groups=["spawner"] instance=ExtResource("5_8c41q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7936, 2, 0.488987)
 
-[node name="HeathUI" type="CanvasLayer" parent="."]
+[node name="UserInterface" type="CanvasLayer" parent="."]
+script = ExtResource("6_b121j")
 
-[node name="Heart" type="TextureRect" parent="HeathUI"]
+[node name="Heart" type="TextureRect" parent="UserInterface"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -146,3 +150,21 @@ grow_vertical = 0
 scale = Vector2(0.522727, 0.522727)
 texture = ExtResource("6_wc255")
 stretch_mode = 3
+
+[node name="Score" type="TextureRect" parent="UserInterface"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 175.0
+offset_bottom = 142.0
+scale = Vector2(0.681882, 0.68)
+texture = ExtResource("7_klq6b")
+stretch_mode = 3
+
+[node name="CrystalCount" type="Label" parent="UserInterface"]
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 184.0
+offset_bottom = 101.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("9_8c41q")
+theme_override_font_sizes/font_size = 50

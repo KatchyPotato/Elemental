@@ -14,12 +14,17 @@ config/name="Elemental"
 run/main_scene="uid://b7b5k8lvn8vks"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+GameState="*res://scripts/GameState.gd"
+
 [global_group]
 
 player=""
 enemy=""
 projectile=""
 defense=""
+spawner=""
 
 [input]
 

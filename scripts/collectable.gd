@@ -25,6 +25,7 @@ func _physics_process(delta):
 
 func _on_pickup_area_entered(body):
 	if body.is_in_group("player"):
+		GameState.crystal_count += 1
 		$Crystal.visible = false
 		$PickupArea/CollisionShape3D.set_deferred("disabled", true)
 		collect_sound.play()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cit03g447ipuj"]
 
-[ext_resource type="Script" uid="uid://c5xd0d0ilp4qu" path="res://scenes/collectable.gd" id="1_llfh3"]
+[ext_resource type="Script" uid="uid://c5xd0d0ilp4qu" path="res://scripts/collectable.gd" id="1_llfh3"]
 [ext_resource type="Texture2D" uid="uid://c5erybuqfsdfi" path="res://sprites/crystal/crystal-red.png" id="1_ti8a4"]
 [ext_resource type="AudioStream" uid="uid://dc275hwgm4u4a" path="res://sounds/collect.mp3" id="3_dnya4"]
 

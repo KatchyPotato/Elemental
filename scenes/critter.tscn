@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://va70c31tlb48" path="res://scripts/critter.gd" id="1_35jsl"]
 [ext_resource type="Texture2D" uid="uid://draciynk5g3cm" path="res://sprites/critter/critter1.png" id="2_uunrr"]
 [ext_resource type="Texture2D" uid="uid://jbjbcepgrj8s" path="res://sprites/critter/critter2.png" id="3_fraou"]
-[ext_resource type="AudioStream" uid="uid://cnre741shkw8e" path="res://sounds/death.mp3" id="4_5mxoi"]
+[ext_resource type="AudioStream" uid="uid://bmsbfoqt8rar3" path="res://sounds/death.mp3" id="4_5mxoi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_35jsl"]
 

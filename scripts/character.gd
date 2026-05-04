@@ -33,6 +33,7 @@ var hands_defending = preload("res://sprites/hands/defending.png")
 @onready var step_sound = $StepSound
 @onready var damage_sound = $DamageSound
 @onready var heal_sound = $HealSound
+@onready var player_death_sound = $PlayerDeathSound
 
 # bullet variables
 var bullet_scene = preload("res://scenes/bullet.tscn")
@@ -42,7 +43,7 @@ const SHOOT_DELAY = 0.5
 
 # health variables
 var health = 0
-@onready var heart = $"../HeathUI/Heart"
+@onready var heart = $"../UserInterface/Heart"
 var heart_frames = [
 	preload("res://ui/health/heart1.png"),
 	preload("res://ui/health/heart2.png"),
@@ -61,6 +62,7 @@ var invincible_timer = 0.0
 const INVINCIBLE_DURATION = 0.5
 var heal_timer = 0.0
 const HEAL_DELAY = 5.0
+var dying = false
 
 # handle first person camera
 func _ready():
@@ -71,6 +73,10 @@ func _ready():
 	
 
 func _unhandled_input(event):
+	
+	if dying:
+		return
+		
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
@@ -84,6 +90,9 @@ func _unhandled_input(event):
 
 func _physics_process(delta: float) -> void:
 	
+	if dying:
+		return
+		
 	# add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -170,12 +179,19 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
+func _process(delta):
+	# camera death animation
+	if dying:
+		camera.rotation.x = lerp(camera.rotation.x, deg_to_rad(90), delta * 2.0)
+	
+# add headbob animation
 func _headbob(time) -> Vector3:
 	var pose = Vector3.ZERO
 	pose.y = sin(t_bob * BOB_FREQ) * BOB_AMP
 	pose.x = cos(t_bob * BOB_FREQ / 2) * BOB_AMP
 	return pose
 	
+# take damage from enemy collision
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("enemy"):
 		take_damage()
@@ -188,10 +204,35 @@ func take_damage():
 	damage_sound.play()
 	health += 1
 	heart.texture = heart_frames[health]
+	# handle death 
 	if health >= 9:
-		get_tree().reload_current_scene()
+		die()
 
 func _on_damage_area_area_entered(area):
 	if area.is_in_group("projectile"):
 		area.queue_free()
 		take_damage()
+		
+func die():
+	dying = true
+	# free mouse
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# stop music
+	$"../BackgroundMusic".stop()
+	
+	# hide UI
+	$"../UserInterface".visible = false
+	$Head/Camera3D/CanvasLayer.visible = false
+	# clear enemies and spawners
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		enemy.queue_free()
+		
+	for spawner in get_tree().get_nodes_in_group("spawner"):
+		spawner.queue_free()
+		
+	# play death sound
+	player_death_sound.play()
+		
+	
+	
+	

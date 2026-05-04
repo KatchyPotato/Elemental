@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw6nac5cfo5mn"]
+
+[ext_resource type="Script" uid="uid://degj7bbmoes60" path="res://scripts/death_screen.gd" id="1_mqh5l"]
+[ext_resource type="Texture2D" uid="uid://tc1e44ysqv4i" path="res://textures/tiles.png" id="1_uyutr"]
+[ext_resource type="FontFile" uid="uid://dpu1y5vokx81p" path="res://ui/score/Asimovian-Regular.ttf" id="2_dwo6e"]
+[ext_resource type="Texture2D" uid="uid://dtjbdm5seuqkt" path="res://ui/score/score.png" id="4_7ns25"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mqh5l")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_uyutr")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_top = 40.0
+offset_right = 373.0
+offset_bottom = 235.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.478431)
+theme_override_constants/shadow_offset_y = 19
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("2_dwo6e")
+theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+
+[node name="FinalScore" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -65.0
+offset_right = 0.5
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_dwo6e")
+theme_override_font_sizes/font_size = 60
+
+[node name="Crystals" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -68.0
+offset_right = -169.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_7ns25")

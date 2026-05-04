@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://brof85trbcqg8" path="res://sprites/goblin/goblin2.png" id="3_u21pb"]
 [ext_resource type="Texture2D" uid="uid://dl3f8hd8v1o0p" path="res://sprites/goblin/goblin3.png" id="4_vho8j"]
 [ext_resource type="Texture2D" uid="uid://d3ucstcsaimb0" path="res://sprites/goblin/goblin4.png" id="5_g2t3q"]
-[ext_resource type="AudioStream" uid="uid://cnre741shkw8e" path="res://sounds/death.mp3" id="6_osho7"]
+[ext_resource type="AudioStream" uid="uid://bmsbfoqt8rar3" path="res://sounds/death.mp3" id="6_osho7"]
 [ext_resource type="AudioStream" uid="uid://b7ycrtvfr4p1h" path="res://sounds/shot.mp3" id="7_yyaat"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_macxp"]

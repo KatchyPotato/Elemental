@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://wwgmm46fitfi"]
+[gd_scene load_steps=15 format=4 uid="uid://wwgmm46fitfi"]
 
 [ext_resource type="Script" uid="uid://c2pej7gn7unjx" path="res://scripts/character.gd" id="1_glpr6"]
 [ext_resource type="Texture2D" uid="uid://dgjkn1he6efmh" path="res://sprites/hands/hands.png" id="2_pjt0s"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://l84jvtf1y38j" path="res://sounds/hum.mp3" id="4_wfnr8"]
 [ext_resource type="AudioStream" uid="uid://df7341hux251c" path="res://sounds/damage.mp3" id="5_dp8ca"]
 [ext_resource type="AudioStream" uid="uid://cdtjck5ukv5pb" path="res://sounds/heal.mp3" id="6_0lw5n"]
+[ext_resource type="AudioStream" uid="uid://bhutr6jwqvhia" path="res://sounds/player-death.mp3" id="7_2cgup"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vu45j"]
 height = 2.5
@@ -99,3 +100,6 @@ stream = ExtResource("5_dp8ca")
 
 [node name="HealSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_0lw5n")
+
+[node name="PlayerDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_2cgup")
